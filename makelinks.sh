@@ -15,7 +15,10 @@ echo "Directory created."
 # Make backup of current dotfiles.
 echo "Make backup of current dotfiles."
 for item in $items; do
-  mv ~/$item $dotfiles_backup
+  # If item exists...
+  if [ -f item ]; then
+  	mv ~/$item $dotfiles_backup
+  fi
 done
 echo "Backup done."
 
