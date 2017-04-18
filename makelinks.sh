@@ -5,7 +5,7 @@ dotfiles_directory=~/dotfiles # My dotfiles directory.
 dotfiles_backup=~/.dotfiles_backup  # Backup directory for current dotfiles.
 
 # Files and folders to symlink in home directory.
-items=".bash_profile .bash_prompts .bashrc .git-completion.bash .vim .vimrc"
+items="bash_profile bash_prompts bashrc git-completion.bash .vim vimrc"
 
 # Create backup directory for current dotfiles.
 echo "Create backup directory for current dotfiles."
