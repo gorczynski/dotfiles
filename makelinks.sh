@@ -25,7 +25,7 @@ echo "Backup done."
 # Create symlinks from home to dotfiles directory.
 echo "Create symlinks from home to dotfiles directory."
 for item in $items; do
-  ln -s $dotfiles_directory/$item ~/$item
+  ln -s $dotfiles_directory/$item ~/.$item
 done
 echo "Symlinks created."
 echo "Done."
