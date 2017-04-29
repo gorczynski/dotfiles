@@ -11,5 +11,5 @@ alias ql="qlmanage -p" # Quick Look preview the file.
 eval "$(thefuck --alias)"
 
 # zsh completions.
- fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 
