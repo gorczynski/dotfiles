@@ -18,7 +18,7 @@ cmd=`uname -m`
 # Make backup of current dotfiles.
 echo "Make backup of current dotfiles."
 for item in $items; do
-  # If item exists...
+  # Execute the procedure if item exists.
   if [ -f $item ]; then
     # On Raspberry Pi we want to add contents of
     # my .bashrc file to existing .bashrc file.
