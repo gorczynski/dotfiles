@@ -7,10 +7,13 @@ dotfiles_backup=~/.dotfiles_backup  # Backup directory for current dotfiles.
 # Files and directories to symlink in home directory.
 items="bash_profile bash_prompts bashrc git-completion.bash vim vimrc"
 
-# Create backup directory for current dotfiles.
-echo -n "Create backup directory for current dotfiles... "
-mkdir -p $dotfiles_backup
-echo "Directory created."
+# Create backup directory for current dotfiles
+# only if the directory doesn't exist.
+if [ ! -d $dotfiles_backup ]; then
+  echo -n "Create backup directory for current dotfiles... "
+  mkdir -p $dotfiles_backup
+  echo "Directory $dotfiles_backup was created."
+fi
 
 # Check the machine hardware name.
 cmd=`uname -m`
