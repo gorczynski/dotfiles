@@ -18,7 +18,7 @@ cmd=`uname -m`
 # Process the items.
 for item in $items; do
   # Execute the procedure only if item exists in home directory.
-  if [ -f /.$item ]; then
+  if [ -f ~/.$item ]; then
     # On Raspberry Pi we want to copy, not move the .bashrc file
     # to the backup directory, and then add contents of my .bashrc
     # file to existing .bashrc file.
