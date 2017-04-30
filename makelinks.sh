@@ -19,14 +19,14 @@ cmd=`uname -m`
 for item in $items; do
   # Execute the procedure only if item exists in home directory.
   if [ -f ~/.$item ]; then
-    # On Raspberry Pi we want to copy, not move the .bashrc file
+    # On Raspberry Pi we want to copy, not move, the .bashrc file
     # to the backup directory, and then add contents of my .bashrc
     # file to existing .bashrc file.
     if [[ "$item" == 'bashrc' && "$cmd" == 'armv7l' ]]; then
       cp ~/.$item $dotfiles_backup/$item
-      echo "" >> ~/.bashrc
-      cat $item >> ~/.bashrc
-      echo "Contents of $item file was added to ~/.bashrc file."
+      echo "" >> ~/.$item
+      cat $item >> ~/.$item
+      echo "Contents of $item file was added to ~/.$item file."
     else
       # Make backup of current dotfile.
       mv ~/.$item $dotfiles_backup/$item
