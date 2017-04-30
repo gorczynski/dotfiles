@@ -15,29 +15,28 @@ echo "Directory created."
 # Check the machine hardware name.
 cmd=`uname -m`
 
-# Make backup of current dotfiles.
-echo "Make backup of current dotfiles."
+# Process the items.
 for item in $items; do
-  # Execute the procedure if item exists.
-  if [ -f $item ]; then
-    # On Raspberry Pi we want to add contents of
-    # my .bashrc file to existing .bashrc file.
+  # Make backup of current dotfiles.
+  # Execute the procedure only if item exists in home directory.
+  if [ -f /.$item ]; then
+    # On Raspberry Pi we want to copy, not move the .bashrc file
+    # to the backup directory, and then add contents of my .bashrc
+    # file to existing .bashrc file.
     if [[ "$item" == 'bashrc' && "$cmd" == 'armv7l' ]]; then
+      cp ~/.$item $dotfiles_backup/$item
       echo "" >> ~/.bashrc
       cat $item >> ~/.bashrc
       echo "Contents of $item file was added to ~/.bashrc file."
     else
-      # ... the item will be moved to backup directory.
-  	  mv ~/.$item $dotfiles_backup/$item
+      mv ~/.$item $dotfiles_backup/$item
       echo "File $item was moved to $dotfiles_backup directory."
     fi
   fi
-done
-echo "Backup done."
 
-# Create symlinks from home to dotfiles directory.
-echo "Create symlinks from home to dotfiles directory."
-for item in $items; do
+  # Create the symlink from home to dotfiles directory.
   ln -s $dotfiles_directory/$item ~/.$item
 done
-echo "Symlinks created. All done."
+
+# The end.
+echo "Backup done, symlinks created. All done."
