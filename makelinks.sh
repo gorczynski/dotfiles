@@ -20,8 +20,8 @@ echo "Make backup of current dotfiles."
 for item in $items; do
   # If item exists...
   if [ -f $item ]; then
-    # On Raspberry Pi we want to add contents
-    # of bashrc file to existing .bashrc file.
+    # On Raspberry Pi we want to add contents of
+    # my .bashrc file to existing .bashrc file.
     if [[ "$item" == 'bashrc' && "$cmd" == 'armv7l' ]]; then
       echo "" >> ~/.bashrc
       cat $item >> ~/.bashrc
