@@ -17,8 +17,15 @@ echo "Make backup of current dotfiles."
 for item in $items; do
   # If item exists...
   if [ -f $item ]; then
-    # ... will be moved to backup directory.
-  	mv ~/.$item $dotfiles_backup/$item
+    # On Raspberry Pi we want to add contents
+    # of bashrc file to existing .bashrc file.
+    if [[ "$item" == 'bashrc' && "$cmd" == 'armv7l' ]]; then
+      echo "" >> ~/.bashrc
+      cat $item >> ~/.bashrc
+    else
+      # ... the item will be moved to backup directory.
+  	   mv ~/.$item $dotfiles_backup/$item
+    fi
   fi
 done
 echo "Backup done."
