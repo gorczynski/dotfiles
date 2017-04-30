@@ -17,7 +17,6 @@ cmd=`uname -m`
 
 # Process the items.
 for item in $items; do
-  # Make backup of current dotfiles.
   # Execute the procedure only if item exists in home directory.
   if [ -f /.$item ]; then
     # On Raspberry Pi we want to copy, not move the .bashrc file
@@ -29,13 +28,16 @@ for item in $items; do
       cat $item >> ~/.bashrc
       echo "Contents of $item file was added to ~/.bashrc file."
     else
+      # Make backup of current dotfile.
       mv ~/.$item $dotfiles_backup/$item
       echo "File $item was moved to $dotfiles_backup directory."
+      # Create the symlink from home to dotfiles directory.
+      ln -s $dotfiles_directory/$item ~/.$item
     fi
+  else
+    # Create the symlink from home to dotfiles directory.
+    ln -s $dotfiles_directory/$item ~/.$item
   fi
-
-  # Create the symlink from home to dotfiles directory.
-  ln -s $dotfiles_directory/$item ~/.$item
 done
 
 # The end.
