@@ -33,7 +33,7 @@ for item in $items; do
     else
       # Make backup of current dotfile.
       mv ~/.$item $dotfiles_backup/$item
-      echo "File $item was moved to $dotfiles_backup directory."
+      echo "File .$item was moved to $dotfiles_backup directory."
       # Create the symlink from home to dotfiles directory.
       ln -s $dotfiles_directory/$item ~/.$item
       echo "Created the symlink for .$item."
