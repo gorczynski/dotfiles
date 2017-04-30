@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Directories
+# Directories.
 dotfiles_directory=~/dotfiles # My dotfiles directory.
 dotfiles_backup=~/.dotfiles_backup  # Backup directory for current dotfiles.
 
-# Files and folders to symlink in home directory.
+# Files and directories to symlink in home directory.
 items="bash_profile bash_prompts bashrc git-completion.bash vim vimrc"
 
 # Create backup directory for current dotfiles.
@@ -25,9 +25,11 @@ for item in $items; do
     if [[ "$item" == 'bashrc' && "$cmd" == 'armv7l' ]]; then
       echo "" >> ~/.bashrc
       cat $item >> ~/.bashrc
+      echo "Contents of $item file was added to ~/.bashrc file."
     else
       # ... the item will be moved to backup directory.
-  	   mv ~/.$item $dotfiles_backup/$item
+  	  mv ~/.$item $dotfiles_backup/$item
+      echo "File $item was moved to $dotfiles_backup directory."
     fi
   fi
 done
@@ -38,5 +40,4 @@ echo "Create symlinks from home to dotfiles directory."
 for item in $items; do
   ln -s $dotfiles_directory/$item ~/.$item
 done
-echo "Symlinks created."
-echo "Done."
+echo "Symlinks created. All done."
