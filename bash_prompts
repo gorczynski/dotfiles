@@ -12,7 +12,7 @@ if tput setaf 1 &> /dev/null; then
 	if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
 		MAGENTA_NEW=$(tput setaf 9)
 		ORANGE_NEW=$(tput setaf 172)
-		GREEN_NEW=$(tput setaf 190)
+		GREEN_NEW=$(tput setaf 002)
 		PURPLE_NEW=$(tput setaf 141)
 	else
 		MAGENTA_NEW=$(tput setaf 5)
@@ -47,5 +47,5 @@ function parse_git_branch() {
 }
 
 # Bash prompts
-export PS1="\n\[${MAGENTA_NEW}\]\u \[$RESET\]in \[$GREEN_NEW\]\w\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE_NEW\]\$(parse_git_branch)\[$RESET\]\n$ \[$RESET\]"
+export PS1="\n${BOLD}\[${MAGENTA_NEW}\]\u \[$RESET\]in ${BOLD}\[$GREEN_NEW\]\w\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")${BOLD}\[$PURPLE_NEW\]\$(parse_git_branch)\[$RESET\]\n$ \[$RESET\]"
 export PS2="\[$ORANGE_NEW\]→ \[$RESET\]"
