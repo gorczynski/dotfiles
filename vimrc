@@ -48,7 +48,7 @@ set showmatch
 set incsearch
 
 " UI settings
-colorscheme Tomorrow-Night
+colorscheme newsprint "Tomorrow-Night
 set t_Co=256
 set ruler
 
