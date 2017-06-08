@@ -18,3 +18,7 @@ source ~/.git-completion.bash
 # User specific environment and startup programs.
 PATH=$PATH:$HOME/bin:/usr/local/sbin
 export PATH
+
+# Improve the Terminal appearance.
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
