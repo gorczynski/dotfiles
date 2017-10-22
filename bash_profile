@@ -8,6 +8,9 @@ if [ -f ~/.bash_prompts ]; then
 	. ~/.bash_prompts
 fi
 
+# GitHub Homebrew API token.
+source ~/.ssh/homebrew-github-api-token
+
 # Tab completion for branch names.
 source ~/.git-completion.bash
 
