@@ -10,7 +10,3 @@ alias el="elinks"
 
 # The Fuck.
 eval "$(thefuck --alias)"
-
-# zsh completions.
-fpath=(/usr/local/share/zsh-completions $fpath)
-
