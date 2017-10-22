@@ -1,6 +1,7 @@
-# Git branch details, colors and bash prompt based on bashstrap (https://github.com/barryclark/bashstrap).
-# Modified version of @gf3’s Sexy Bash Prompt
-# (https://github.com/gf3/dotfiles)
+# Git branch details, colors and bash prompt based on bashstrap:
+# (https://github.com/barryclark/bashstrap).
+# Inspired by mathiasbynens prompt:
+# (https://github.com/mathiasbynens/dotfiles).
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 	export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -8,37 +9,40 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
 fi
 
 if tput setaf 1 &> /dev/null; then
-	tput sgr0
-	if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
-		MAGENTA_NEW=$(tput setaf 9)
-		ORANGE_NEW=$(tput setaf 172)
-		GREEN_NEW=$(tput setaf 002)
-		PURPLE_NEW=$(tput setaf 141)
-	else
-		MAGENTA_NEW=$(tput setaf 5)
-		ORANGE_NEW=$(tput setaf 4)
-		GREEN_NEW=$(tput setaf 2)
-		PURPLE_NEW=$(tput setaf 1)
-	fi
 	BOLD=$(tput bold)
-	RESET=$(tput sgr0)
+	RESET=$(tput sgr0) # Reset colors.
+	# Colors in macOS terminal.
+	BLUE_NEW=$(tput setaf 33)
+	GREEN_NEW=$(tput setaf 76)
+	ORANGE_NEW=$(tput setaf 172)
+	PURPLE_NEW=$(tput setaf 141)
+	RED_NEW=$(tput setaf 124)
+	WHITE_NEW=$(tput setaf 15)
+	YELLOW_NEW=$(tput setaf 226)
 else
-	MAGENTA_NEW="\033[1;31m"
-	ORANGE_NEW="\033[1;33m"
-	GREEN_NEW="\033[1;32m"
-	PURPLE_NEW="\033[1;35m"
 	BOLD=""
 	RESET="\033[m"
+	# Colors.
+	BLUE_NEW="\033[0;34m"
+	GREEN_NEW="\033[1;32m"
+	ORANGE_NEW="\033[1;33m"
+	PURPLE_NEW="\033[1;35m"
+	RED_NEW="\033[1;31m"
+	WHITE_NEW="\033[0;37m"
+	YELLOW_NEW="\033[1;33m"
 fi
 
-export MAGENTA_NEW
+export RED_NEW
 export ORANGE_NEW
 export GREEN_NEW
 export PURPLE_NEW
+export YELLOW_NEW
+export BLUE_NEW
+export WHITE_NEW
 export BOLD
 export RESET
 
-# Git branch details
+# Git branch details.
 function parse_git_dirty() {
 	[[ $(git status 2> /dev/null | tail -n1) != *"working tree clean"* ]] && echo "*"
 }
@@ -46,6 +50,33 @@ function parse_git_branch() {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-# Bash prompts
-export PS1="\n${BOLD}\[${MAGENTA_NEW}\]\u \[$RESET\]in ${BOLD}\[$GREEN_NEW\]\w\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")${BOLD}\[$PURPLE_NEW\]\$(parse_git_branch)\[$RESET\]\n$ \[$RESET\]"
-export PS2="\[$ORANGE_NEW\]→ \[$RESET\]"
+# Get active Python virtualenv name.
+function get_virtualenv_name() {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+      echo "(${VIRTUAL_ENV##*/}) "
+  fi
+}
+
+# Symbol in prompt.
+symbol="$ " #"⚡ "
+
+# Prepare bash prompts.
+PS1="\n"; # Newline.
+PS1+="\[$YELLOW_NEW\]\$(get_virtualenv_name)"; # Python virtualenv name.
+PS1+="$BOLD\[$RED_NEW\]\u"; # Bold username.
+PS1+="\[$RESET\] at ";
+PS1+="$BOLD\[$ORANGE_NEW\]\h"; # Hostname.
+PS1+="\[$RESET\] in ";
+PS1+="${BOLD}\[$GREEN_NEW\]\w"; # Bold current directory name.
+PS1+="\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \""; # Git details.
+PS1+=" on ";
+PS1+="\")${BOLD}\[$PURPLE_NEW\]\$(parse_git_branch)"; # Git details.
+PS1+="\[$RESET\]\n"; # Newline.
+PS1+="$symbol\[$WHITE_NEW\]"; # Symbol ($).
+export PS1
+
+PS2="\[$ORANGE_NEW\]→ \[$RESET\]"
+export PS2
+
+# Restore the output color.
+trap 'echo -ne "$RESET" ' DEBUG
