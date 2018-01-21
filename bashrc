@@ -11,6 +11,7 @@ alias ql="qlmanage -p" # Quick Look preview the file.
 eval "$(thefuck --alias)"
 
 # Python as framework.
+# Taken from <https://matplotlib.org/faq/osx_framework.html>.
 function frameworkpython {
     if [[ ! -z "$VIRTUAL_ENV" ]]; then
         PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3 "$@"
