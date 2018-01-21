@@ -9,3 +9,12 @@ alias ql="qlmanage -p" # Quick Look preview the file.
 
 # The Fuck.
 eval "$(thefuck --alias)"
+
+# Python as framework.
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3 "$@"
+    else
+        /usr/local/bin/python3 "$@"
+    fi
+}
