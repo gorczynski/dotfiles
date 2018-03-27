@@ -6,6 +6,8 @@ export LC_ALL="en_US.UTF-8"
 alias ls='ls -GFh'
 alias lr='ls -hartl'
 alias ql="qlmanage -p" # Quick Look preview the file.
+alias mysql=/usr/local/mysql/bin/mysql
+alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 
 # The Fuck.
 eval "$(thefuck --alias)"
