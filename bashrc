@@ -1,13 +1,23 @@
+# User specific environment and startup programs.
+PATH=$PATH:$HOME/bin:/usr/local/sbin
+export PATH
+
 # Language.
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Aliases.
-alias ls='ls -GFh'
-alias lr='ls -hartl'
-alias ql="qlmanage -p" # Quick Look preview the file.
-alias mysql=/usr/local/mysql/bin/mysql
-alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+# Improve the Terminal appearance.
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Prevent from accidentally installing packages globally.
+export PIP_REQUIRE_VIRTUALENV=true
+
+# GitHub Homebrew API token.
+source ~/.ssh/homebrew-github-api-token
+
+# Tab completion for branch names.
+source ~/.git-completion.bash
 
 # The Fuck.
 eval "$(thefuck --alias)"
@@ -22,8 +32,10 @@ function frameworkpython {
     fi
 }
 
-# Prevent from accidentally installing packages globally.
-export PIP_REQUIRE_VIRTUALENV=true
-
 # Support for z command.
 . /usr/local/etc/profile.d/z.sh
+
+# Get the Bash prompts.
+if [ -f ~/.bash_prompts ]; then
+	. ~/.bash_prompts
+fi
