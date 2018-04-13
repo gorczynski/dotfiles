@@ -24,3 +24,6 @@ function frameworkpython {
 
 # Prevent from accidentally installing packages globally.
 export PIP_REQUIRE_VIRTUALENV=true
+
+# Support for z command.
+. /usr/local/etc/profile.d/z.sh
