@@ -19,6 +19,9 @@ source ~/.ssh/homebrew-github-api-token
 # Tab completion for branch names.
 source ~/.git-completion.bash
 
+# Aliases.
+source ~/.aliases
+
 # The Fuck.
 eval "$(thefuck --alias)"
 
