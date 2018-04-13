@@ -21,3 +21,6 @@ function frameworkpython {
         /usr/local/bin/python3 "$@"
     fi
 }
+
+# Prevent from accidentally installing packages globally.
+export PIP_REQUIRE_VIRTUALENV=true
