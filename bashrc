@@ -1,5 +1,5 @@
 # User specific environment and startup programs.
-PATH=$PATH:$HOME/bin:/usr/local/sbin
+PATH=$PATH:$HOME/bin:/usr/local/sbin:/usr/local/opt/sbt@0.13/bin
 export PATH
 
 # Language.
